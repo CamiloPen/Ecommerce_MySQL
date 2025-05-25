@@ -12,6 +12,9 @@ create table if not exists category (
     active bool
 );
 
+CREATE UNIQUE INDEX indx_pay_code ON paymentMethod(code);
+CREATE INDEX indx_pay_name ON paymentMethod(name);
+
 create table if not exists paymentMethod (
     id int auto_increment  primary key,
     code varchar(10) not null,
@@ -20,12 +23,18 @@ create table if not exists paymentMethod (
     active bool
 );
 
+CREATE UNIQUE INDEX indx_pay_code ON paymentMethod(code);
+CREATE INDEX indx_pay_name ON paymentMethod(name);
+
 create table if not exists city (
     id int auto_increment  primary key,
     code varchar(60) not null,
     name varchar(60) not null,
     country varchar(60) not null
 );
+
+CREATE UNIQUE INDEX indx_pay_code ON paymentMethod(code);
+CREATE INDEX indx_pay_name ON paymentMethod(name);
 
 create table if not exists user (
     id int auto_increment  primary key,
@@ -45,6 +54,9 @@ create table if not exists user (
     foreign key (city_id) references city (id)
 );
 
+CREATE UNIQUE INDEX indx_pay_code ON paymentMethod(code);
+CREATE INDEX indx_pay_name ON paymentMethod(name);
+
 create table if not exists product (
     id int auto_increment primary key,
     code varchar(10) not null,
@@ -60,6 +72,9 @@ create table if not exists product (
     foreign key (category_id) references category (id)
 );
 
+CREATE UNIQUE INDEX indx_pay_code ON paymentMethod(code);
+CREATE INDEX indx_pay_name ON paymentMethod(name);
+
 create table if not exists bill (
     id int auto_increment primary key,
     code varchar(10) not null,
@@ -71,6 +86,9 @@ create table if not exists bill (
     foreign key (paymentMethod_id) references paymentMethod (id),
     foreign key (seller_id) references user (id)
 );
+
+CREATE UNIQUE INDEX indx_pay_code ON paymentMethod(code);
+CREATE INDEX indx_pay_name ON paymentMethod(name);
 
 create table if not exists bill_detail (
     bill_id int not null,
